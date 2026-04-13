@@ -17,3 +17,49 @@ Let's take a look inside the `src` folder
  - `services` --> It contains the business logic and interact with repositories for data from the database.
 
  - `utils` --> It contains helper methods, error classes etc.
+
+### Setup the project
+
+ - Download this template from github and open it in your favorite text editor.
+ - Go inside the folder path and execute the following command:
+  ```
+  npm install
+  ```
+ - Inside the `src/config` folder create a file named as `config.json` and write the following code:
+  ```
+    {
+    "development": {
+        "username": "root",
+        "password": null,
+        "database": "database_development",
+        "host": "127.0.0.1",
+        "dialect": "mysql"
+    },
+    "test": {
+        "username": "root",
+        "password": null,
+        "database": "database_test",
+        "host": "127.0.0.1",
+        "dialect": "mysql"
+    },
+    "production": {
+        "username": "root",
+        "password": null,
+        "database": "database_production",
+        "host": "127.0.0.1",
+        "dialect": "mysql"
+    }
+    }
+  ```
+ - Or go inside the `src` folder and execute the following command:
+  ```
+    npx sequelize init
+  ```
+ - By executing the above command you will get the migrations and seeders folder along with a config.json inside the config folder.
+ - If you're setting up your development environment, then write the username, password of your db and in dialect mention whatever db you are using. For ex:
+ mysql, mariadb etc.
+ - If you're setting up test or prod environment, make sure you also replace the host with the hosted db url.
+ - To run the server execute 
+  ```
+    npm run dev
+  ```
