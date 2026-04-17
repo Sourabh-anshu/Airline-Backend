@@ -16,4 +16,12 @@ router
     .get('/',
         AirplaneController.getAirplanes
     );
+
+// /api/v1/airplanes/:id GET 
+// For getting a particular airplane details.
+router
+    .get('/:id',
+        AirplaneController.getAirplane
+    )
+    
 module.exports = router;

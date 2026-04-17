@@ -39,5 +39,8 @@ module.exports = {
      */
     await queryInterface.bulkDelete('Airplanes', 
       {[Op.or] : [{modelNumber: 'airbusa240'}, { modelNumber: 'airbusa440'}]})
+    
+    // Reset auto-increment counter
+    await queryInterface.sequelize.query('ALTER TABLE Airplanes AUTO_INCREMENT = 1')
   }
 };
