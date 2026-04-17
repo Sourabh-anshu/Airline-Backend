@@ -74,9 +74,31 @@ async function getAirplane(req, res) {
 async function destroyAirplane(req, res) {
     try {
         const response = await AirplaneService.destroyAirplane(req.params.id);
-        SuccessResponse.data = `The airplane with id ${req.params.id} is successfully destroyed with response ${response}`;
+        SuccessResponse.data = `The airplane with id ${req.params.id} is successfully deleted`;
         return res
                 .status(StatusCodes.OK)
+                .json(SuccessResponse);
+    } catch (error) {
+        ErrorResponse.error = error;
+        return res
+                .status(error.statusCode)
+                .json(ErrorResponse);
+    }
+}
+
+/**
+ * PATCH : /airplanes/:id
+ * req-body : { capacity : newCapacity } 
+ */
+async function updateAirplane(req,res) {
+    try {
+        let data = {};
+        if(req.body.modelNumber)    Object.assign(data, {modelNumber : req.body.modelNumber});
+        if(req.body.capacity)    Object.assign(data, {capacity : req.body.capacity});
+        const airplane = await AirplaneService.updateAirplane(req.params.id, data);
+        SuccessResponse.data = airplane;
+        return res
+                .status(StatusCodes.CREATED)
                 .json(SuccessResponse);
     } catch (error) {
         ErrorResponse.error = error;
@@ -90,5 +112,6 @@ module.exports = {
     createAirplane,
     getAirplanes,
     getAirplane,
-    destroyAirplane
+    destroyAirplane,
+    updateAirplane
 }

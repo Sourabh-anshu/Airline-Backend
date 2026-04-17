@@ -13,6 +13,18 @@ function validateCreateRequest(req, res, next) {
     next();
 }
 
+function validateUpdateRequest(req, res, next) {
+    if(!req.body) {
+        ErrorResponse.message = `Something went wrong while updating the airplane`;
+        ErrorResponse.error = new AppError(['explanation: No data is provided to update like modelNumber or capacity'], StatusCodes.BAD_REQUEST);
+        return res
+                .status(StatusCodes.BAD_REQUEST)
+                .json(ErrorResponse);
+    }
+    next();
+}
+
 module.exports ={
-     validateCreateRequest
+     validateCreateRequest,
+     validateUpdateRequest
 }

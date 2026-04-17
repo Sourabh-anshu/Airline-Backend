@@ -31,4 +31,11 @@ router
         AirplaneController.destroyAirplane
     )
 
+// /api/v1/airplanes/:id PATCH 
+// For updating a particular airplane details.
+router
+    .patch('/:id',
+        AirplaneMiddlewares.validateUpdateRequest,
+        AirplaneController.updateAirplane
+    )
 module.exports = router;
