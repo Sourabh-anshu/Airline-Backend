@@ -3,6 +3,7 @@ const { AirplaneService } = require('../services');
 const { response } = require('express');
 const { error } = require('winston');
 const { SuccessResponse, ErrorResponse } = require('../utils/common');
+const AppError = require('../utils/errors/app-error');
 
 /**
  * POST : /airplanes
@@ -48,7 +49,7 @@ async function getAirplanes(req, res) {
 }
 
 /**
- * POST : /airplanes/:id
+ * GET : /airplanes/:id
  * req-body : {} 
  */
 async function getAirplane(req, res) {
@@ -66,8 +67,28 @@ async function getAirplane(req, res) {
     }
 }
 
+/**
+ * DELETE : /airplanes/:id
+ * req-body : {} 
+ */
+async function destroyAirplane(req, res) {
+    try {
+        const response = await AirplaneService.destroyAirplane(req.params.id);
+        SuccessResponse.data = `The airplane with id ${req.params.id} is successfully destroyed with response ${response}`;
+        return res
+                .status(StatusCodes.OK)
+                .json(SuccessResponse);
+    } catch (error) {
+        ErrorResponse.error = error;
+        return res
+                .status(error.statusCode)
+                .json(ErrorResponse);
+    }
+}
+
 module.exports = {
     createAirplane,
     getAirplanes,
-    getAirplane
+    getAirplane,
+    destroyAirplane
 }

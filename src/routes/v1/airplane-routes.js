@@ -24,4 +24,11 @@ router
         AirplaneController.getAirplane
     )
     
+// /api/v1/airplanes/:id DELETE 
+// For deleting a particular airplane details.
+router
+    .delete('/:id',
+        AirplaneController.destroyAirplane
+    )
+
 module.exports = router;
