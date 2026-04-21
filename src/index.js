@@ -12,20 +12,6 @@ app.use('/api', apiRoutes);
 
 
 
-app.listen(ServerConfig.PORT, async ()=>{
+app.listen(ServerConfig.PORT, ()=>{
     console.log(`Successfully started the server at PORT: ${ServerConfig.PORT}`);
-
-    const { City, Airport} = require('./models');
-    const mumbai = await City.findByPk(6);
-    // console.log(mumbai);
-    // const mumAirport = await Airport.create({name: 'Chhatrapati SivaJi Airport', code: 'MUM', cityId : 6});
-    // console.log(mumAirport);
-    // const newMumAirport = await Airport.create({name:'Navi Mumbai Airport', code : 'NVM', cityId:6});
-    // console.log(newMumAirport);
-    // await mumbai.createAirport({name:'Juhu Airport', code:'JHU'});
-    await City.destroy({
-        where: {
-            id : 6
-        }
-    })
 })
